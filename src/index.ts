@@ -52,19 +52,35 @@ const writeToFile = (tasks: TTask[]) => {
 const listAllTasks = (options: string) => {
   try {
     const allTasks = readAllTasks();
-    if (typeof options === "boolean") {
-      console.table(allTasks);
-    } else if (options === "todo") {
-      const todoTasks = allTasks.filter((task) => task.status === "todo");
-      console.table(todoTasks);
-    } else if (options === "done") {
-      const doneTasks = allTasks.filter((task) => task.status === "done");
-      console.table(doneTasks);
-    } else if (options === "in-progress") {
-      const inProgressTasks = allTasks.filter(
-        (task) => task.status === "in-progress"
-      );
-      console.table(inProgressTasks);
+    if (allTasks.length > 0) {
+      if (typeof options === "boolean") {
+        console.table(allTasks);
+      } else if (options === "todo") {
+        const todoTasks = allTasks.filter((task) => task.status === "todo");
+        if (todoTasks.length > 0) {
+          console.table(todoTasks);
+        } else {
+          console.log("No todo tasks available.");
+        }
+      } else if (options === "done") {
+        const doneTasks = allTasks.filter((task) => task.status === "done");
+        if (doneTasks.length > 0) {
+          console.table(doneTasks);
+        } else {
+          console.log("No completed tasks available.");
+        }
+      } else if (options === "in-progress") {
+        const inProgressTasks = allTasks.filter(
+          (task) => task.status === "in-progress"
+        );
+        if (inProgressTasks.length > 0) {
+          console.table(inProgressTasks);
+        } else {
+          console.log("No tasks currently in progress.");
+        }
+      }
+    } else {
+      console.log("No current tasks.");
     }
   } catch (error) {
     console.log(`Error while listing all tasks: ${error}`);
