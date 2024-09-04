@@ -12,6 +12,8 @@ Then go to the project root directory.
 
 At the root directory, open the terminal and run following commands:
 
+`npm run build`
+
  - To Add new task `-a <task>`
  
     E.g. `node dist/index.js -a "New Task"`
